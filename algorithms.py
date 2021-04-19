@@ -46,12 +46,12 @@ def bin_search_right(S, g):
     return lo
 
 
-def bisect_right(group, before, after):
-    """Similar to bin_search_right, but use specific order of elements"""
-    lo, hi = 0, len(group)
+def bisect_right(S, g, before):
+    """Similar to bin_search_right, but prepend 'before' to tested slice"""
+    lo, hi = 0, len(g)
     while hi - lo > 1:
         mid = (lo + hi + 1) // 2
-        if not is_censored(before + group[:mid] + NULL_CHAR + after):
+        if not is_censored(S.union({before + g[:mid]})):
             lo = mid
         else:
             hi = mid
@@ -170,9 +170,9 @@ def comp_aware_bin_split_2(s):
                 diff *= 2
         diff //= 2
         s_1, j = s[i:], j - i
-        j = i + 1 + bisect_right(s_1[j-diff:j],
-                                 NULL_CHAR.join(C) + NULL_CHAR + s_1[:j-diff],
-                                 s_1[1:])
+        j = i + 1 + bisect_right(C.union({s_1[1:]}),
+                                 s_1[j-diff:j],
+                                 s_1[:j-diff])
         C = C.union({s[i:j+diff]})
         s = s[i+1:]
         if not s or is_censored(C):
