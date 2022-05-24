@@ -2,8 +2,6 @@
 
 from simulator import Simulator
 
-NULL_CHAR = '\x00'
-
 def bin_search(S, g):
     lo, hi = 0, len(g)
     while hi - lo > 1:
@@ -89,7 +87,8 @@ def isolate(isolator, sim):
         was_censored = is_censored(test, sim)
 
 def is_censored(test, sim):
-    return sim.send(NULL_CHAR.join(test))
+    separator = '\x00' # will be platform specific
+    return sim.send(separator.join(test))
 
 def main():
     sim = Simulator()

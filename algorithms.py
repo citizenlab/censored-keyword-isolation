@@ -2,8 +2,6 @@
 
 from simulator import Simulator
 
-NULL_CHAR = '\x00'
-
 def bin_search(S, g, is_censored):
     """Perform a binary search over g and return the index of the first
     sensitive component in g.
@@ -88,7 +86,8 @@ def comp_aware_bin_split_2(s, is_censored):
 def main():
     sim = Simulator()
     def is_censored(test):
-        return sim.send(NULL_CHAR.join(test))
+        separator = '\x00' # will be platform specific
+        return sim.send(separator.join(test))
     for art in sim.get_articles():
         kw = comp_aware_bin_split(art, is_censored)
         sim.report_found_keyword(kw)
