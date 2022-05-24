@@ -93,7 +93,7 @@ def is_censored(test, sim):
 def main():
     sim = Simulator()
     for art in sim.get_articles():
-        isolator = comp_aware_bin_split_2(art)
+        isolator = comp_aware_bin_split(art)
         kw = isolate(isolator, sim)
         sim.report_found_keyword(kw)
         print(sim.query_log[sim.this_article])
