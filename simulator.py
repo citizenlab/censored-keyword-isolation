@@ -70,14 +70,13 @@ class Simulator:
         """Take a found keyword and return whether the keyword was correctly
         identified.
         """
-        if isinstance(proposed_kw, str):
-            proposed_kw = set(proposed_kw.split('+'))
-        if proposed_kw in self.kws_in_this_article():
+        kws_in_this_article = self.kws_in_this_article()
+        if set(proposed_kw) in kws_in_this_article:
             return True
         else:
-            print("article index: %d" % self.this_article)
-            print("found_combo: ", proposed_kw)
-            print("expected combo: ", self.kws_in_this_article())
+            print('article index: %d' % self.this_article)
+            print('found_combo: %s', proposed_kw)
+            print('expected combo: %s', [tuple(sorted(combo)) for combo in kws_in_this_article])
             return False
 
     def kws_in_this_article(self):
