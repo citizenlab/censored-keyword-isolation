@@ -1,7 +1,5 @@
 #!/usr/bin/env python3
 
-from simulator import Simulator
-
 def bin_search(S, g):
     lo, hi = 0, len(g)
     while hi - lo > 1:
@@ -91,6 +89,7 @@ def is_censored(test, sim):
     return sim.send(separator.join(test))
 
 def main():
+    from simulator import Simulator
     sim = Simulator()
     for art in sim.get_articles():
         isolator = comp_aware_bin_split(art)

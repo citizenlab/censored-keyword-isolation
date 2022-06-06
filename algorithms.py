@@ -1,7 +1,5 @@
 #!/usr/bin/env python3
 
-from simulator import Simulator
-
 def bin_search(S, g, is_censored):
     """Perform a binary search over g and return the index of the first
     sensitive component in g.
@@ -84,6 +82,7 @@ def comp_aware_bin_split_2(s, is_censored):
     return C
 
 def main():
+    from simulator import Simulator
     sim = Simulator()
     def is_censored(test):
         separator = '\x00' # will be platform specific
