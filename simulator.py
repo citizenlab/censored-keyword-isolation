@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-
 # populate this list with articles to test
 articles = [
     "委员会共同主席在报告发布记者会上表示：“这份报告是针对中国政府持续并广泛侵犯人权问题现"
@@ -88,7 +86,3 @@ class Simulator:
             if all([k in self.articles[self.this_article] for k in this_kw]):
                 kws_in_art.append(this_kw)
         return kws_in_art
-
-
-if __name__ == '__main__':
-    pass
