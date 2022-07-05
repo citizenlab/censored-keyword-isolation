@@ -24,9 +24,10 @@ def bisect_right(S, g, before):
 
 def comp_aware_bin_split(s):
     C = set()
+    j = 0
     while True:
         i = yield from bin_search(C, s)
-        j = i + 1
+        j = max(i + 1, j)
         k = len(s)
         while j < k:
             was_censored = yield C.union({s[i:j], s[i+1:]})
@@ -44,14 +45,16 @@ def comp_aware_bin_split(s):
         was_censored = yield C
         if was_censored:
             break
+        j -= i
     return C
 
 def comp_aware_bin_split_2(s,):
     C = set()
+    j = 0
     while True:
         i = yield from bin_search(C, s)
         diff = 1
-        j = i + 1
+        j = max(i + 1, j)
         k = len(s)
         while j < k:
             was_censored = yield C.union({s[i:j], s[i+1:]})
@@ -67,12 +70,16 @@ def comp_aware_bin_split_2(s,):
                                     s_1[:j-diff])
         j += i + 1
         C = C.union({s[i:j+diff]})
-        s = s[i+1:]
+        if j + diff != len(s):
+            s = s[i+1:]
+        else:
+            s = ""
         if not s:
             break
         was_censored = yield C
         if was_censored:
             break
+        j -= i
     return C
 
 def isolate(isolator, sim):

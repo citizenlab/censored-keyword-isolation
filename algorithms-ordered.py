@@ -35,9 +35,10 @@ def comp_aware_bin_split(s, is_censored):
     :return: sensitive keyword combination as a set of strings
     """
     C = ()
+    j = 0
     while True:
         i = bin_search(C, s, is_censored)
-        j = i + 1
+        j = max(i + 1, j)
         k = len(s)
         while j < k:
             if is_censored(C + (s[i:j], s[i+1:])):
@@ -51,6 +52,7 @@ def comp_aware_bin_split(s, is_censored):
             s = ""
         if not s or is_censored(C):
             break
+        j -= i
     return C
 
 def comp_aware_bin_split_2(s, is_censored):
@@ -58,10 +60,11 @@ def comp_aware_bin_split_2(s, is_censored):
     rather than linear search to identify ends of components.
     """
     C = ()
+    j = 0
     while True:
         i = bin_search(C, s, is_censored)
         diff = 1
-        j = i + 1
+        j = max(i + 1, j)
         k = len(s)
         while j < k:
             if is_censored(C + (s[i:j], s[i+1:])):
@@ -76,9 +79,13 @@ def comp_aware_bin_split_2(s, is_censored):
                                  s_1[:j-diff],
                                  is_censored)
         C = C + (s[i:j+diff],)
-        s = s[i+1:]
+        if j + diff != len(s):
+            s = s[i+1:]
+        else:
+            s = ""
         if not s or is_censored(C):
             break
+        j -= i
     return C
 
 def main():
