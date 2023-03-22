@@ -23,7 +23,7 @@ def bisect_right(S, g, before, is_censored):
     """
     lo, hi = 0, len(g)
     while hi - lo > 1:
-        mid = (lo + hi + 1) // 2
+        mid = (lo + hi) // 2
         if not is_censored(S + (before + g[:mid],)):
             lo = mid
         else:

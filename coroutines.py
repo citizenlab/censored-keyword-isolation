@@ -14,7 +14,7 @@ def bin_search(S, g):
 def bisect_right(S, g, before):
     lo, hi = 0, len(g)
     while hi - lo > 1:
-        mid = (lo + hi + 1) // 2
+        mid = (lo + hi) // 2
         was_censored = yield S.union({before + g[:mid]})
         if not was_censored:
             lo = mid
