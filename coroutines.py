@@ -48,7 +48,7 @@ def comp_aware_bin_split(s):
         j -= i
     return C
 
-def comp_aware_bin_split_2(s,):
+def comp_aware_bin_split_2(s):
     C = set()
     j = 0
     while True:
