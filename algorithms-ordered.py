@@ -1,11 +1,13 @@
 #!/usr/bin/env python3
 
 def bin_search(S, g, is_censored):
-    """Perform a binary search over g and return the index of the first
-    sensitive component in g.
+    """Perform a binary search over g and return the index of the leftmost
+    character of the leftmost component of the keyword combination whose
+    leftmost component is rightmost in g.
     :param S: set of strings to include with test messages
     :param g: str
-    :return: index of first sensitive character in g
+    :return: index of the leftmost character of the leftmost component of the
+    keyword combination whose leftmost component is rightmost in g
     """
     lo, hi = 0, len(g)
     while hi - lo > 1:
@@ -18,8 +20,13 @@ def bin_search(S, g, is_censored):
 
 def bisect_right(S, g, before, is_censored):
     """Perform a binary search over g and return the index of the rightmost
-    censored character instead of the leftmost, prepending 'before' to tested
-    slice.
+    character of the rightmost component of the keyword combination whose
+    rightmost component is leftmost in g.
+    :param S: set of strings to include with test messages
+    :param g: str
+    :param before: prepend 'before' to tested slices of g
+    :return: index of the rightmost character of the rightmost component of the
+    keyword combination whose rightmost component is leftmost in g
     """
     lo, hi = 0, len(g)
     while hi - lo > 1:
@@ -31,8 +38,10 @@ def bisect_right(S, g, before, is_censored):
     return lo
 
 def comp_aware_bin_split(s, is_censored):
-    """Improved version of bin_split adapted to for identifying keyword combos
-    :return: sensitive keyword combination as a set of strings
+    """Isolates a censored keyword combination.  If more than one censored
+    keyword combination is present, it isolate the one whose leftmost component
+    is rightmost in g.
+    :return: censored keyword combination
     """
     C = ()
     j = 0
