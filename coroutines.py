@@ -65,10 +65,9 @@ def comp_aware_bin_split_2(s):
                 diff *= 2
         diff //= 2
         s_1, j = s[i:], j - i
-        j = yield from bisect_right(C.union({s_1[1:]}),
-                                    s_1[j-diff:j],
-                                    s_1[:j-diff])
-        j += i + 1
+        j = i + 1 + (yield from bisect_right(C.union({s_1[1:]}),
+                                             s_1[j-diff:j],
+                                             s_1[:j-diff]))
         C = C.union({s[i:j+diff]})
         if j + diff != len(s):
             s = s[i+1:]

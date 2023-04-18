@@ -63,10 +63,9 @@ def comp_aware_bin_split_2(s):
         diff //= 2
         s_1 = s[:i]
         k = max(j, 0)
-        j = yield from bisect_left((s_1[:-1],) + C,
-                                   s_1[k:j+diff],
-                                   s_1[j+diff:])
-        j += k
+        j = k + (yield from bisect_left((s_1[:-1],) + C,
+                                        s_1[k:j+diff],
+                                        s_1[j+diff:]))
         C = (s[j:i],) + C
         if j > 0:
             s = s[:i-1]
