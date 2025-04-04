@@ -4,7 +4,7 @@ def bin_search(S, g, is_censored):
     """Perform a binary search over g and return the index of the rightmost
     character of the rightmost component of the keyword combination whose
     rightmost component is leftmost in g.
-    :param S: set of strings to include with test messages
+    :param S: tuple of strings to include with test messages
     :param g: str
     :return: index of the rightmost character of the rightmost component of the
     keyword combination whose rightmost component is leftmost in g
@@ -22,9 +22,9 @@ def bisect_left(S, g, after, is_censored):
     """Perform a binary search over g and return the index of the leftmost
     character of the leftmost component of the keyword combination whose
     leftmost component is rightmost in g.
-    :param S: set of strings to include with test messages
+    :param S: tuple of strings to include with test messages
     :param g: str
-    :param before: append 'after' to tested slices of g
+    :param after: append 'after' to tested slices of g
     :return: index of the leftmost character of the leftmost component of the
     keyword combination whose leftmost component is rightmost in g
     """

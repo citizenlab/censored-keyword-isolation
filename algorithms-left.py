@@ -24,7 +24,7 @@ def bisect_left(S, g, after, is_censored):
     leftmost component is rightmost in g.
     :param S: set of strings to include with test messages
     :param g: str
-    :param before: append 'after' to tested slices of g
+    :param after: append 'after' to tested slices of g
     :return: index of the leftmost character of the leftmost component of the
     keyword combination whose leftmost component is rightmost in g
     """
